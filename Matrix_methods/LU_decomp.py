@@ -13,15 +13,15 @@ def LU_decomp(A):
                 front = A[j, k]
                 lam = front/pivot
                 A[j, k:] = A[j, k:] - lam*A[k, k:]
-                L[j,k] = lam #replaces next 0 below the diagnoal
+                L[j,k] = lam #replaces initialized zero below the diagonal
     L[n-1,n-1] = 1
-    return L, A #A is transformed to upper triangular; L is lower triangular comprised of Gauss multipliers
+    return L, A    #A is transformed to upper trian; L is lower trian comprised of corresponding Gauss multipliers
 
 
 
 
 def tri_solver(T, v, upper=True):
-    '''solves Tu = v by substitution methods where T is upper or lower triangular'''
+    '''solves Tu = v by substitution methods where T must be either upper or lower triangular'''
     T = T.astype('f')
     v = v.astype('f')
     n = len(v)

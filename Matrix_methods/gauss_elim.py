@@ -7,6 +7,7 @@ def linear_solver(A, b):
 
     def gauss_elim():
         '''transforms A into upper triangular form via Gauss-elimination row operations'''       
+        
         for k in range(0, n-1): #from 0 to n-2 
             pivot = A[k, k]
             for j in range(k+1, n):
