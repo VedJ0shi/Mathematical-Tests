@@ -19,20 +19,14 @@ def linear_solver(A, b):
             rel_sizes = [abs(A[j,k])/s[j] for j in range(k, n)]
             max_rel_size = max(rel_sizes)
             if max_rel_size == A[k,k]/s[k]:
-                    print('no swap')
                     pass
             else:
                 r = rel_sizes.index(max_rel_size) + k 
-                print('r=', r)
                 if abs(A[r,k]) < tol:
                     raise SingularMatrixException('Matrix is singular, cannot proceed')
                 swap = (A[r].copy(), b[r], s[r])    #.copy() creates a shallow copy of the array
                 A[r], b[r], s[r] = (A[k], b[k], s[k])
                 A[k], b[k], s[k] = swap
-
-            print(A)
-            print(s)
-            print()
 
             pivot = A[k,k]
             for j in range(k+1, n):
