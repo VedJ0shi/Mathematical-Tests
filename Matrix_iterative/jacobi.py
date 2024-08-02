@@ -20,8 +20,7 @@ def jacobi_solver(A, b, max_iterations=100):
                 raise IterativeMethodException('No rows to swap with; cannot proceed with Jacobi method on this matrix')
             swap = (A[i].copy(), b[i])
             A[i], b[i] = A[k], b[k]
-            A[k], b[k] = swap
-        
+            A[k], b[k] = swap      
         row = [-A[i,j]/A[i,i] if j != i else 0 for j in range(n)]
         J[i] = row
         c[i] = b[i]/A[i,i]
@@ -29,7 +28,7 @@ def jacobi_solver(A, b, max_iterations=100):
     def iterate(x, iteration=0, tol=1e-6):
         if iteration > max_iterations:
             raise IterativeMethodException('Cannot complete the iterations, limit reached')
-        x_next = np.dot(J,x) + c
+        x_next = np.dot(J,x) + c #main step in algorithm (simultaneous displacement)
         print(x_next)
         if np.linalg.norm(x - x_next, ord=np.inf)/np.linalg.norm(x, ord=np.inf) < tol:
             return x_next
