@@ -1,8 +1,12 @@
 import numpy as np
 
 def LU_decomp(A):
-    '''applies Doolittle's decomposition to A; results can be stored for later'''
-    A = A.astype('f')
+    '''
+    applies Doolittle's decomposition to A; 
+    result is LU factorization which can be stored for later
+    '''
+    if not A.dtype == 'float64':
+        A = A.astype('float64')
     n = len(A[0])
     L = np.zeros((n,n))
     for k in range(0, n-1):
@@ -15,15 +19,17 @@ def LU_decomp(A):
                 A[j, k:] = A[j, k:] - lam*A[k, k:]
                 L[j,k] = lam #replaces initialized zero below the diagonal
     L[n-1,n-1] = 1
-    return L, A    #A is transformed to upper trian; L is lower trian comprised of corresponding Gauss multipliers
+    return L, A    #A is transformed to upper triang; L is lower triang comprised of corresponding Gauss multipliers
 
 
 
 
 def tri_solver(T, v, upper=True):
     '''solves Tu = v by substitution methods where T must be either upper or lower triangular'''
-    T = T.astype('f')
-    v = v.astype('f')
+    if not T.dtype == 'float64':
+        T = T.astype('f')
+    if not v.dtype == 'float64':
+        v = v.astype('f')
     n = len(v)
     u = np.zeros(n)
     if upper:

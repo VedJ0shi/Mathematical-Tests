@@ -6,8 +6,10 @@ class IterativeMethodException(Exception):
 
 
 def jacobi_solver(A, b, max_iterations=100):
-    A = A.astype('f') 
-    b = b.astype('f')
+    if not A.dtype == 'float64':
+        A = A.astype('float64')
+    if not b.dtype == 'float64':
+        b = b.astype('float64')
     n = len(b)
     J = np.zeros((n,n))
     c = np.zeros(n)
@@ -25,7 +27,7 @@ def jacobi_solver(A, b, max_iterations=100):
         J[i] = row
         c[i] = b[i]/A[i,i]
     
-    def iterate(x, iteration=0, tol=1e-6):
+    def iterate(x, iteration=0, tol=1e-8):
         if iteration > max_iterations:
             raise IterativeMethodException('Cannot complete the iterations, limit reached')
         x_next = np.dot(J,x) + c #main step in algorithm (simultaneous displacement)

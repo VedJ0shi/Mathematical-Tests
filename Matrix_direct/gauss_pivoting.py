@@ -4,8 +4,10 @@ class SingularMatrixException(Exception):
     pass
 
 def linear_solver(A, b):
-    A = A.astype('f') 
-    b = b.astype('f')
+    if not A.dtype == 'float64':
+        A = A.astype('float64') 
+    if not b.dtype == 'float64':
+        b = b.astype('float64')
     n = len(b) 
 
     def gauss_elim(tol=1e-12):

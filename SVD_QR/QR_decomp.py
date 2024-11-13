@@ -1,7 +1,8 @@
 import numpy as np
 
 def QR_decomp(A):
-    A = A.astype('f')
+    if not A.dtype == 'float64':
+        A = A.astype('float64')
     n, m = A.shape
     Q = np.empty((n,n))
     R = np.zeros((n, m))
@@ -17,7 +18,4 @@ def QR_decomp(A):
             for j in range(n-1, -1, -1):
                 R[j, i] = np.dot(A[:, i], Q[:, j])
     return Q, R
-       
-
-
-
+    

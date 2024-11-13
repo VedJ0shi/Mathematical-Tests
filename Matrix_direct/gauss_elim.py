@@ -1,8 +1,10 @@
 import numpy as np
 
 def linear_solver(A, b):
-    A = A.astype('f') #convert entries to floats (64 bit)
-    b = b.astype('f')
+    if not A.dtype == 'float64':
+        A = A.astype('float64') 
+    if not b.dtype == 'float64':
+        b = b.astype('float64')
     n = len(b) #also the number of rows in A; rows/columns are zero-indexed 
 
     def gauss_elim():
