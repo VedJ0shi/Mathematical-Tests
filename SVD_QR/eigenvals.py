@@ -7,7 +7,7 @@ def make_similar(A):
 
 def find_eigenvals_QR(A, diff_target=1e-8):
     '''
-    returns a list of eigenvalues of A found from applying the iterative QR algorithm;
+    returns list of eigenvalues of A found from applying the iterative QR algorithm;
     eigenvalues will converge on the diagonal of the similar matrices
     '''
     A_ = make_similar(A) #A_=RQ is similar to A
@@ -21,7 +21,7 @@ def find_eigenvals_QR(A, diff_target=1e-8):
         corner = A_[-1,-1]
         i = i + 1
     print("# of iterations:", i)
-    eigenvals = [A_[i,i] for i in range(n)] #A_ is the ith similar matrix computed in the iterations
+    eigenvals = [A_[i,i] for i in range(n)] #A_ is the ith similar matrix computed in the iteration chain
     return eigenvals
 
 
